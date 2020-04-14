@@ -10,6 +10,7 @@
 </head>
 <body>
   <div id="app">
+    <el-tag>{{form.name}}</el-tag>
     <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="尺寸">
             <el-input v-model="form.name"></el-input>
@@ -37,7 +38,7 @@
       },
       methods: {
         onSubmit() {
-          console.log('submit!');
+          console.log(this.form.name)
         }
       }
     })
