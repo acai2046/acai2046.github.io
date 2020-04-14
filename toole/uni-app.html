@@ -38,7 +38,9 @@
       },
       methods: {
         onSubmit() {
-          console.log(this.form.name)
+            let name = this.form.name
+          this.form.name = 750 * name / 1080
+          confirm.log(this.form.name)
         }
       }
     })
