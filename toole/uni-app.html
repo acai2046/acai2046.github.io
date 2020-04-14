@@ -4,23 +4,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>一句话编程</title>
+  <title>1080:750</title>
   <!-- import CSS -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
-    <div class="block">
-      <el-timeline>
-        
-        <el-timeline-item timestamp="2020年4月14日 10:42:29" placement="top">
-          <el-card>
-            <h4><a href="toole/uni-app.html">uni-尺寸换算</a></h4>
-            <p>acai2046 提交于 2020年4月14日 10:42:29</p>
-          </el-card>
-        </el-timeline-item>
-      </el-timeline>
-    </div>
+    <el-form ref="form" :model="form" label-width="80px">
+      <el-form-item label="活动名称">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+    </el-form>
   </div>
 </body>
   <!-- import Vue before Element -->
