@@ -10,7 +10,7 @@
 </head>
 <body>
   <div id="app">
-    <el-tag>{{form.name}}</el-tag>
+    <el-tag>{{form.value}}</el-tag>
     <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="尺寸">
             <el-input v-model="form.name"></el-input>
@@ -32,15 +32,16 @@
       data: function() {
         return { 
             form: {
-              name: ''
+              name: 0,
+              value: 0
             },
        }
       },
       methods: {
         onSubmit() {
             let name = this.form.name
-          this.form.name = 750 * name / 1080
-          console.log(this.form.name)
+          this.form.value = 750 * name / 1080
+          console.log(this.form.value)
         }
       }
     })
