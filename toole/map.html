@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        ul,li{list-style-type:none;}
+        a{text-decoration: none;}
+        .mapleft{width:100%;margin-bottom:30px;}
+        .mapleft li{margin-right:15px;float:left;}
+        .mapleft li a{color:#fff;border-radius:5px;padding:5px 15px;background:#0070a1;}
+        .mapleft li a:hover,.mapleft li.active a{background:#F69433;}
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=SxxGrVKB6IzHyoP567HpKd28gHzgd17h"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <div style="width:768px;margin:30px auto;">
+        <div class="mapleft">
+            <ul>
+                <li class="active"><a href="javascript:;" data-key="学校">教育机构</a></li>
+                <li><a href="javascript:;" data-key="超市">商场超市</a></li>
+                <li><a href="javascript:;" data-key="医院">医疗机构</a></li>
+                <li><a href="javascript:;" data-key="公交">交通设施</a></li>
+            </ul>
+            <div style="clear:both;"></div>
+        </div>
+        <div style="width:768px;height:500px;" id="allmap"></div>
+    </div>
+    <script type="text/javascript">
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");            // 创建Map实例
+        var mPoint = new BMap.Point(116.337788,39.754183);
+        map.enableScrollWheelZoom();
+        map.centerAndZoom(mPoint,15);
+        //创建小狐狸
+        var pt = new BMap.Point(116.337788,39.754183);
+        var myIcon = new BMap.Icon("/address-icon.png", new BMap.Size(35,41));
+        var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+        marker2.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+        map.addOverlay(marker2);              // 将标注添加到地图中
+
+        var circle = new BMap.Circle(mPoint,1000,{fillColor:"transparent", strokeColor:'transparent', strokeWeight: 0 ,fillOpacity: 0, strokeOpacity: 0});
+        map.addOverlay(circle);
+
+        $(function(){
+            var local =  new BMap.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});
+            local.searchNearby('学校',mPoint,1000);
+            $(".mapleft a").click(function(){
+                map.clearOverlays();//清除地图覆盖物
+                var datakey = $(this).attr('data-key');
+                $(this).parent().addClass('active').siblings().removeClass('active');
+                var local =  new BMap.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});
+                local.searchNearby(datakey,mPoint,1000);
+            })
+        })
+    </script>
+</body>
+</html>
